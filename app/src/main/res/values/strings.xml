@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TwitterNews</string>
+    <string name="loading_error_message">There was a error loading</string>
+    <string name="spinner_title">twitter_user</string>
+</resources>
