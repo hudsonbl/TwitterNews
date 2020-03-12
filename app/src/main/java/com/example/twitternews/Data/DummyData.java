@@ -19,4 +19,11 @@ public class DummyData {
                                       "Health care in US",
                                       "Fool me once, your not fooling me again"};
 
+    public String twitter_tweet = "This is america, dont catch you slipping homie";
+
+    @Override
+    public String toString(){
+        return this.twitter_tweet;
+    }
+
 }

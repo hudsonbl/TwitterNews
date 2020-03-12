@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
 
         dummyData = new DummyData();
 
-
-
         mSearchBoxET = findViewById(R.id.et_search_box);
         mTwitterUserSearchRV = findViewById(R.id.rv_search_results);
 
@@ -71,11 +69,13 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
         Log.d(TAG, "Inside of user search: " + searchQuery);
         for(int i = 0; i < 6; i++){
             DummyData tempData = new DummyData();
-            Log.d(TAG, "===============================================");
-            Log.d(TAG, "===============================================");
-            Log.d(TAG, "===============================================");
-            Log.d(TAG, "===============================================");
-            Log.d(TAG, "===============================================");
+            Log.d(TAG, "Assigning user: " + dummyData.twitter_users[i]);
+            tempData.twitter_user = dummyData.twitter_users[i];
+            searchResult.add(tempData);
+            mUserSearchAdapter.updateSearchResults(searchResult);
+        }
+        for(int i = 0; i < 6; i++){
+            DummyData tempData = new DummyData();
             Log.d(TAG, "Assigning user: " + dummyData.twitter_users[i]);
             tempData.twitter_user = dummyData.twitter_users[i];
             searchResult.add(tempData);
@@ -85,6 +85,6 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
 
     @Override
     public void onSearchResultClicked(DummyData repo) {
-        Log.d(TAG, "Search query?");
+        Log.d(TAG, "Search query?" + repo.twitter_user);
     }
 }
