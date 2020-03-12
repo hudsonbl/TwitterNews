@@ -11,6 +11,8 @@ form of an news app.
 	2. Update the scroll feature to present a dropdown as a user is clicked
 		2.1 This can be done with dummy data to get things going
 		2.2 Data Binding offers the option to access xml views with code ex: textview android:title = "@{twitter_name}"
+		(Update/Investigate 3/11: May open user search queries in a new intent when click on user instead
+					  of using a drop down box(spinner))
 	3. Fetch google search data to populate drop down menu items
 		3.1 Use JSOUP 
 		3.2 Extract URLs 
