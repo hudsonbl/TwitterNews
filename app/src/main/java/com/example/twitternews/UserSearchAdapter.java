@@ -72,25 +72,16 @@ public class UserSearchAdapter extends RecyclerView.Adapter<UserSearchAdapter.Se
         // TODO: 3/11/2020 : Need to make this grab content from the twitter tweets and grab url.
         // TODO: 3/11/2020 Need to construct a class to do this
 
-
         SearchResultViewHolder(View itemView) {
             super(itemView);
             mSearchResultTV = itemView.findViewById(R.id.tv_search_result);
-            mSpinner = itemView.findViewById(R.id.s_user_queries);
 
-            ArrayAdapter<String> tweetsAdapter = new ArrayAdapter<String>(MyApplication.getAppContext(), android.R.layout.simple_spinner_item, data.twitter_tweets);
-            tweetsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            mSpinner.setAdapter(tweetsAdapter);
-
-            
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mResultClickListener.onSearchResultClicked(
                             mSearchResultList.get(getAdapterPosition())
                     );
-
-                    mSpinner.performClick();
                 }
             });
         }

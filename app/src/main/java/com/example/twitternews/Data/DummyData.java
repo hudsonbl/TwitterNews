@@ -1,6 +1,8 @@
 package com.example.twitternews.Data;
 
-public class DummyData {
+import java.io.Serializable;
+
+public class DummyData implements Serializable {
     // JSON Field we will extract
     public String twitter_user;
 

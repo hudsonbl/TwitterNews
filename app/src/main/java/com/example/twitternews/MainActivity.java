@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.twitternews.Data.DummyData;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements UserSearchAdapter.OnSearchResultClickListener {
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
         mLoadingIndicatorPB = findViewById(R.id.pb_loading_bar);
         mErrorMessageTV = findViewById(R.id.tv_error_message);
 
+        // TODO: 3/17/2020 update this to actually search twitter users twitter API 
         doUserSearch("Hello World"); // This would usually be in onclick but right now is just used to put dummy data to screen
 
         Button searchButton = findViewById(R.id.btn_search);
@@ -86,5 +89,8 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
     @Override
     public void onSearchResultClicked(DummyData repo) {
         Log.d(TAG, "Search query?" + repo.twitter_user);
+        Intent intent = new Intent(this, UserTweetActivity.class);
+        intent.putExtra(UserTweetActivity.TWEET_QUERIE_ACTIVITY, repo);
+        startActivity(intent);
     }
 }

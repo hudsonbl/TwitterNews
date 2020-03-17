@@ -10,8 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name="com.example.twitternews.MyApplication">
-
-
+        <activity
+            android:name=".UserTweetActivity"
+            android:parentActivityName=".MainActivity"/>
 
         <activity android:name=".MainActivity">
             <intent-filter>
