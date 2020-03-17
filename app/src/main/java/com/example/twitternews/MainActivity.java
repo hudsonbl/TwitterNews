@@ -1,12 +1,17 @@
 package com.example.twitternews;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +38,10 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String numTweets = sharedPreferences.getString("num_tweets", "5");
+        Log.d(TAG, "NUMBER OF TWEETS: " + numTweets);
 
         dummyData = new DummyData();
 
@@ -86,5 +95,25 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
     @Override
     public void onSearchResultClicked(DummyData repo) {
         Log.d(TAG, "Search query?" + repo.twitter_user);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        switch (menuItem.getItemId()) {
+            case R.id.action_settings:
+                Log.d(TAG, "SELECTED!");
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(menuItem);
+        }
     }
 }
