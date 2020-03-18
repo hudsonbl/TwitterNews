@@ -1,6 +1,8 @@
 package com.example.twitternews;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,22 +25,14 @@ import com.example.twitternews.Utils.TwitterUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.example.twitternews.Data.WebData;
 
 public class MainActivity extends AppCompatActivity implements UserSearchAdapter.OnSearchResultClickListener {
   private static final String TAG = MainActivity.class.getSimpleName();
 
-  private ArrayList<WebData> webList;
-
-//    {
-//        try {
-//            webList = new GoogleSearch().doSearch("hello", 5);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
+    private ArrayList<WebData> webList;
     private RecyclerView mTwitterUserSearchRV;
     private EditText mSearchBoxET;
     private ProgressBar mLoadingIndicatorPB;
@@ -46,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
     private UserSearchAdapter mUserSearchAdapter;
     private TwitterUtil mTwitterUtil;
     private ArrayList<TwitterData> mTwitterData;
+    private TweetPackageViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
         setContentView(R.layout.activity_main);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String numTweets = sharedPreferences.getString("num_tweets", "5");
+        final String numTweets = sharedPreferences.getString("num_tweets", "5");
         Log.d(TAG, "NUMBER OF TWEETS: " + numTweets);
 
         mTwitterUtil = new TwitterUtil();
@@ -71,6 +66,14 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
         mLoadingIndicatorPB = findViewById(R.id.pb_loading_bar);
         mErrorMessageTV = findViewById(R.id.tv_error_message);
 
+        mViewModel = new ViewModelProvider(this).get(TweetPackageViewModel.class);
+        mViewModel.getTwitterData().observe(this, new Observer<List<TwitterData>>(){
+            @Override
+            public void onChanged(List<TwitterData> twitterData){
+                mUserSearchAdapter.updateSearchResults((ArrayList<TwitterData>) twitterData);
+            }
+        });
+
         Button searchButton = findViewById(R.id.btn_search);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,8 +89,11 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
 
     private void doUserSearch(String searchQuery){
         Log.d(TAG, "Inside of user search: " + searchQuery);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String numTweetsString = preferences.getString("num_tweets", "5");
+        int numTweets = Integer.parseInt(numTweetsString);
 
-        mTwitterData.add(mTwitterUtil.searchForUserTweets(searchQuery, 5));
+        mTwitterData.add(mTwitterUtil.searchForUserTweets(searchQuery, numTweets));
         mUserSearchAdapter.updateSearchResults(mTwitterData);
     }
 
