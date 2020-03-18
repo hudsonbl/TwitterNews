@@ -3,7 +3,7 @@
     <string name="loading_error_message">There was a error loading</string>
     <string name="spinner_title">twitter_user</string>
     <string name="number_tweets_key">num_tweets</string>
-    <string name="number_tweets_title">Number of Tweets</string>
+    <string name="number_tweets_title">Number of Results</string>
     <string name="number_tweets_default">5</string>
     <string name="action_settings">Settings</string>
 </resources>
