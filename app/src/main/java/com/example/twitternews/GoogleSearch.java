@@ -54,11 +54,6 @@ public class GoogleSearch {
                 }
             }
         }
-        Log.d("----","---------------------------------------");
-        for (WebData webGuy: webList){
-            Log.d("URL:", webGuy.URL);
-            Log.d("TITLE:", webGuy.Title);
-        }
         return webList;
     }
 
