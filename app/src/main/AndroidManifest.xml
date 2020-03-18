@@ -15,7 +15,9 @@
         android:name="com.example.twitternews.MyApplication">
         <activity
             android:name=".UserTweetActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:launchMode="singleTop"/>
+
 
         <activity android:name=".WebTweetActivity"
             android:parentActivityName=".UserTweetActivity"/>

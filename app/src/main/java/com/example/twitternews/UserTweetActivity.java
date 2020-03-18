@@ -10,8 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twitternews.Data.TwitterData;
+import com.example.twitternews.Data.WebData;
 
 import java.io.Serializable;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserTweetActivity extends AppCompatActivity implements TweetSearchAdapter.OnTweetResultClickListener{
@@ -57,5 +60,7 @@ public class UserTweetActivity extends AppCompatActivity implements TweetSearchA
         Intent intent = new Intent(this, WebTweetActivity.class);
         intent.putExtra(WebTweetActivity.TWEET_WEB_ACTIVITY, tweet);
         startActivity(intent);
+        // open next intent, create web items and display them.
+
     }
 }
