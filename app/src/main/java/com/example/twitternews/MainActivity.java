@@ -23,11 +23,25 @@ import com.example.twitternews.Data.DummyData;
 import com.example.twitternews.Data.TwitterData;
 import com.example.twitternews.Utils.TwitterUtil;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.example.twitternews.Data.WebData;
+import com.example.twitternews.GoogleSearch;
+
 public class MainActivity extends AppCompatActivity implements UserSearchAdapter.OnSearchResultClickListener {
-    private static final String TAG = MainActivity.class.getSimpleName();
+  private static final String TAG = MainActivity.class.getSimpleName();
+
+  private ArrayList<WebData> webList;
+
+    {
+        try {
+            webList = new GoogleSearch().doSearch("hello", 5);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private RecyclerView mTwitterUserSearchRV;
     private EditText mSearchBoxET;
