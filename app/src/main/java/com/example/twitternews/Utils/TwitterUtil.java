@@ -23,8 +23,8 @@ public class TwitterUtil{
     public TwitterUtil() { }
     public TwitterData searchForUserTweets(String user, int numTweets){
         TwitterData userData = new TwitterData();
-        //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        //StrictMode.setThreadPolicy(policy);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
                 .setOAuthConsumerKey("B7HZ7ttMzZs5s2uORrjaI3Oee")

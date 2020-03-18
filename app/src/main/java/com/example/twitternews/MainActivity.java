@@ -89,9 +89,11 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
     private void doUserSearch(String searchQuery){
         Log.d(TAG, "Inside of user search: " + searchQuery);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        int numTweets = preferences.getInt("num_tweets", 5);
+        String numTweetsString = preferences.getString("num_tweets", "5");
+        int numTweets = Integer.parseInt(numTweetsString);
 
-        mViewModel.loadUserSearch(searchQuery, numTweets);
+        mTwitterData.add(mTwitterUtil.searchForUserTweets(searchQuery, numTweets));
+        mUserSearchAdapter.updateSearchResults(mTwitterData);
     }
 
     @Override

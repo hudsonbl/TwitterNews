@@ -16,6 +16,7 @@ import static android.content.ContentValues.TAG;
 public class UserRepository implements UserAsyncTask.Callback{
     private static final String TAG = UserRepository.class.getSimpleName();
     private MutableLiveData<List<TwitterData>> mUserResults;
+    private List<TwitterData> mDummyList;
 
     private String mCurrentQuery;
     private int mNumTweets;
@@ -48,7 +49,8 @@ public class UserRepository implements UserAsyncTask.Callback{
     }
 
     @Override
-    public void onSearchFinished(List<TwitterData> searchResults) {
-        mUserResults.setValue(searchResults);
+    public void onSearchFinished(TwitterData searchResults) {
+        mDummyList.add(searchResults);
+        mUserResults.setValue(mDummyList);
     }
 }
