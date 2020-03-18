@@ -3,16 +3,11 @@ package com.example.twitternews;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.twitternews.Data.DummyData;
-import com.example.twitternews.Data.TwitterData;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class TweetSearchAdapter extends RecyclerView.Adapter<TweetSearchAdapter.TweetResultViewHolder> {
@@ -62,7 +57,7 @@ public class TweetSearchAdapter extends RecyclerView.Adapter<TweetSearchAdapter.
         public TweetResultViewHolder(@NonNull View itemView) {
             super(itemView);
             mSearchQueryTV = itemView.findViewById(R.id.tv_tweet_item);
-            String item = (String) mSearchQueryTV.getText();
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

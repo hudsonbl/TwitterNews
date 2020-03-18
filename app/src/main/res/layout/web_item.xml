@@ -6,7 +6,7 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/tv_tweet_item"
+        android:id="@+id/tv_web_item"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:textSize="22sp"/>

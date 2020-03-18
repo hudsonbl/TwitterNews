@@ -3,24 +3,14 @@ package com.example.twitternews;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.twitternews.Data.DummyData;
-import com.example.twitternews.Data.DummyDataTwo;
 import com.example.twitternews.Data.TwitterData;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 public class UserSearchAdapter extends RecyclerView.Adapter<UserSearchAdapter.SearchResultViewHolder>
 {

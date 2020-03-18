@@ -2,30 +2,26 @@ package com.example.twitternews;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.twitternews.Data.DummyData;
 import com.example.twitternews.Data.TwitterData;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
 public class UserTweetActivity extends AppCompatActivity implements TweetSearchAdapter.OnTweetResultClickListener{
     public static final String TWEET_QUERIE_ACTIVITY = "TweetSearch";
     private static final String TAG = UserTweetActivity.class.getSimpleName();
 
-    // TODO: 3/17/2020 Need to change this to real data type: twitterdata json 
     private TwitterData mData;
-    TextView mUserNameTV;
-    RecyclerView mUserTweetsRV;
-    TweetSearchAdapter tweetAdapter;
+    private TextView mUserNameTV;
+    private RecyclerView mUserTweetsRV;
+    private TweetSearchAdapter tweetAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,16 +43,19 @@ public class UserTweetActivity extends AppCompatActivity implements TweetSearchA
             // TODO: 3/17/2020 update this to actually search tweets JSOUP API
             // check main activity lines 36-44 for how to get the urls :)
 
-            doTweetSearches(mData.twitter_tweets);
+            postTweetsToRV(mData.twitter_tweets);
         }
     }
     
-    private void doTweetSearches(List<String> searchQuery){
+    private void postTweetsToRV(List<String> searchQuery){
         tweetAdapter.updateTweetResults(searchQuery);
     }
 
     @Override
     public void onTweetResultClicked(String tweet){
         Log.d(TAG, "This is where something will happen with new data");
+        Intent intent = new Intent(this, WebTweetActivity.class);
+        intent.putExtra(WebTweetActivity.TWEET_WEB_ACTIVITY, tweet);
+        startActivity(intent);
     }
 }

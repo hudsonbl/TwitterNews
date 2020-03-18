@@ -16,19 +16,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.twitternews.Data.DummyData;
 import com.example.twitternews.Data.TwitterData;
 import com.example.twitternews.Utils.TwitterUtil;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.example.twitternews.Data.WebData;
-import com.example.twitternews.GoogleSearch;
 
 public class MainActivity extends AppCompatActivity implements UserSearchAdapter.OnSearchResultClickListener {
   private static final String TAG = MainActivity.class.getSimpleName();
@@ -49,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
     private TextView mErrorMessageTV;
     private UserSearchAdapter mUserSearchAdapter;
     private TwitterUtil mTwitterUtil;
-    private DummyData dummyData;
     private ArrayList<TwitterData> mTwitterData;
 
     @Override
