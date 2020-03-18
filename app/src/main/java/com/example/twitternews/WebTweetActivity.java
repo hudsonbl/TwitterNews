@@ -52,7 +52,7 @@ public class WebTweetActivity extends AppCompatActivity implements WebSearchAdap
     private void doWebSearches(String tweetQuery){
         Log.d(TAG, "Tweet Query Search: " + tweetQuery);
 
-        // TODO: 3/18/2020 Do web searches, store them into a list then update adapter below 
+        // TODO: 3/18/2020 Do web searches, store them into a list then update adapter below
         // mWSearchAdapter.updateWebData();
     }
 
