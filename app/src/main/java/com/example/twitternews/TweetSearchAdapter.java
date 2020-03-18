@@ -13,25 +13,23 @@ import com.example.twitternews.Data.DummyData;
 import com.example.twitternews.Data.TwitterData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TweetSearchAdapter extends RecyclerView.Adapter<TweetSearchAdapter.TweetResultViewHolder> {
 
-    // TODO: 3/17/2020 : Dummy Data replace
-    private TwitterData mTwitterData;
+    private List<String> mTweetData;
     private OnTweetResultClickListener mClickListener;
 
     interface OnTweetResultClickListener{
-        // TODO: 3/17/2020 update dummy data
-        void onTweetResultClicked(TwitterData data);
+        void onTweetResultClicked(String tweet);
     }
 
     public TweetSearchAdapter(OnTweetResultClickListener listener){
         mClickListener = listener;
     }
     
-    public void updateTweetResults(TwitterData tweetResults){
-        // TODO: 3/17/2020 will need to change
-        mTwitterData = tweetResults;
+    public void updateTweetResults(List<String> tweetResults){
+        mTweetData = tweetResults;
         notifyDataSetChanged();
     }
 
@@ -45,15 +43,14 @@ public class TweetSearchAdapter extends RecyclerView.Adapter<TweetSearchAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull TweetResultViewHolder holder, int position) {
-        // TODO: 3/17/2020 change this bull shit
-        holder.bind(TwitterData);
+        holder.bind(mTweetData.get(position));
     }
 
     @Override
     public int getItemCount() {
         // TODO: 3/17/2020 change dummy data
-        if(mTwitterData != null){
-            return mTwitterData.twitter_tweets.size();
+        if(mTweetData != null){
+            return mTweetData.size();
         }else{
             return 0;
         }
@@ -70,15 +67,14 @@ public class TweetSearchAdapter extends RecyclerView.Adapter<TweetSearchAdapter.
                 @Override
                 public void onClick(View v) {
                     mClickListener.onTweetResultClicked(
-                            mTwitterData.get(getAdapterPosition())
+                            mTweetData.get(getAdapterPosition())
                     );
                 }
             });
         }
 
-        // TODO: 3/17/2020 change this, this needs to update with query result for a good title from web crawl
-        void bind(TwitterData data){
-            mSearchQueryTV.setText(data.twitter_tweet);
+        public void bind(String tweet) {
+            mSearchQueryTV.setText(tweet);
         }
     }
 }

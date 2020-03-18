@@ -15,13 +15,14 @@ import com.example.twitternews.Data.DummyData;
 import com.example.twitternews.Data.TwitterData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserTweetActivity extends AppCompatActivity implements TweetSearchAdapter.OnTweetResultClickListener{
     public static final String TWEET_QUERIE_ACTIVITY = "TweetSearch";
     private static final String TAG = UserTweetActivity.class.getSimpleName();
 
     // TODO: 3/17/2020 Need to change this to real data type: twitterdata json 
-    private ArrayList<TwitterData> mData;
+    private TwitterData mData;
     TextView mUserNameTV;
     RecyclerView mUserTweetsRV;
     TweetSearchAdapter tweetAdapter;
@@ -48,12 +49,12 @@ public class UserTweetActivity extends AppCompatActivity implements TweetSearchA
         }
     }
     
-    private void doTweetSearches(ArrayList<String> searchQuery){
-        tweetAdapter.updateTweetResults(tweet);
+    private void doTweetSearches(List<String> searchQuery){
+        tweetAdapter.updateTweetResults(searchQuery);
     }
 
     @Override
-    public void onTweetResultClicked(DummyData data){
+    public void onTweetResultClicked(String tweet){
         Log.d(TAG, "This is where something will happen with new data");
     }
 }

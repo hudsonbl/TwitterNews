@@ -27,10 +27,10 @@ public class TwitterUtil{
         StrictMode.setThreadPolicy(policy);
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
-                .setOAuthConsumerKey("Key")
-                .setOAuthConsumerSecret("Key")
-                .setOAuthAccessToken("Key")
-                .setOAuthAccessTokenSecret("Key");
+                .setOAuthConsumerKey("B7HZ7ttMzZs5s2uORrjaI3Oee")
+                .setOAuthConsumerSecret("kN8YJD3ABLksPQyC2SzXffAhVH8mZFjCeKMIXWDcY2Wya2V7ZE")
+                .setOAuthAccessToken("391040782-FAxAPMIMRkX1l88Wo6owhBpCO9XU4c3gZL1npXel")
+                .setOAuthAccessTokenSecret("nsQ2UoOTtO4gjx4V60dxaGMFkcTEkTauCvV4wQ76u4DxC");
         TwitterFactory tf = new TwitterFactory(cb.build());
         Twitter twitter = tf.getInstance();
         try{
@@ -44,7 +44,6 @@ public class TwitterUtil{
                 for(Status status : statuses){
                     i++;
                     Log.d(TAG, "Itr: " + i + " User name: " + user + " Tweet: " + status.getText());
-                    Log.d(TAG, "Itr: " + i + " User name2: " + user + " Tweet: " + status.getText());
                     userData.twitter_tweets.add(status.getText());
                     if(i == numTweets){
                         return userData;

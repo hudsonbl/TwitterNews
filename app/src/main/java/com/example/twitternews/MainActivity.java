@@ -75,8 +75,6 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
         });
     }
 
-    // TODO: 3/1/2020 Need to interface with a search to twitter api
-    // This just posts to tv.
     private void doUserSearch(String searchQuery){
         Log.d(TAG, "Inside of user search: " + searchQuery);
 
@@ -86,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
 
     @Override
     public void onSearchResultClicked(TwitterData repo) {
-        Log.d(TAG, "Search query?" + repo.twitter_user);
+        Log.d(TAG, "Search query?" + repo.twitter_username);
         Intent intent = new Intent(this, UserTweetActivity.class);
         intent.putExtra(UserTweetActivity.TWEET_QUERIE_ACTIVITY, repo);
         startActivity(intent);
