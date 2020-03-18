@@ -20,6 +20,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.twitternews.Data.DummyData;
+import com.example.twitternews.Data.TwitterData;
+import com.example.twitternews.Utils.TwitterUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,8 +34,9 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
     private ProgressBar mLoadingIndicatorPB;
     private TextView mErrorMessageTV;
     private UserSearchAdapter mUserSearchAdapter;
-    private Spinner mSpinner;
+    private TwitterUtil mTwitterUtil;
     private DummyData dummyData;
+    private ArrayList<TwitterData> mTwitterData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
         String numTweets = sharedPreferences.getString("num_tweets", "5");
         Log.d(TAG, "NUMBER OF TWEETS: " + numTweets);
 
-        dummyData = new DummyData();
+        mTwitterUtil = new TwitterUtil();
+        mTwitterData = new ArrayList<TwitterData>();
 
         mSearchBoxET = findViewById(R.id.et_search_box);
         mTwitterUserSearchRV = findViewById(R.id.rv_search_results);
@@ -58,9 +62,6 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
         mLoadingIndicatorPB = findViewById(R.id.pb_loading_bar);
         mErrorMessageTV = findViewById(R.id.tv_error_message);
 
-        // TODO: 3/17/2020 update this to actually search twitter users twitter API 
-        doUserSearch("Hello World"); // This would usually be in onclick but right now is just used to put dummy data to screen
-
         Button searchButton = findViewById(R.id.btn_search);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
                 String searchQuery = mSearchBoxET.getText().toString();
                 if(!TextUtils.isEmpty(searchQuery)){
                     Log.d(TAG, "Searching User: " + searchQuery);
+                    doUserSearch(searchQuery);
                 }
             }
         });
@@ -76,26 +78,14 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
     // TODO: 3/1/2020 Need to interface with a search to twitter api
     // This just posts to tv.
     private void doUserSearch(String searchQuery){
-        ArrayList<DummyData> searchResult = new ArrayList<>();
         Log.d(TAG, "Inside of user search: " + searchQuery);
-        for(int i = 0; i < 6; i++){
-            DummyData tempData = new DummyData();
-            Log.d(TAG, "Assigning user: " + dummyData.twitter_users[i]);
-            tempData.twitter_user = dummyData.twitter_users[i];
-            searchResult.add(tempData);
-            mUserSearchAdapter.updateSearchResults(searchResult);
-        }
-        for(int i = 0; i < 6; i++){
-            DummyData tempData = new DummyData();
-            Log.d(TAG, "Assigning user: " + dummyData.twitter_users[i]);
-            tempData.twitter_user = dummyData.twitter_users[i];
-            searchResult.add(tempData);
-            mUserSearchAdapter.updateSearchResults(searchResult);
-        }
+
+        mTwitterData.add(mTwitterUtil.searchForUserTweets(searchQuery, 5));
+        mUserSearchAdapter.updateSearchResults(mTwitterData);
     }
 
     @Override
-    public void onSearchResultClicked(DummyData repo) {
+    public void onSearchResultClicked(TwitterData repo) {
         Log.d(TAG, "Search query?" + repo.twitter_user);
         Intent intent = new Intent(this, UserTweetActivity.class);
         intent.putExtra(UserTweetActivity.TWEET_QUERIE_ACTIVITY, repo);

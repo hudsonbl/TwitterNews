@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twitternews.Data.DummyData;
 import com.example.twitternews.Data.DummyDataTwo;
+import com.example.twitternews.Data.TwitterData;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -23,20 +24,18 @@ import java.util.ListIterator;
 
 public class UserSearchAdapter extends RecyclerView.Adapter<UserSearchAdapter.SearchResultViewHolder>
 {
-    // TODO: 3/1/2020 : Need to update DummyData value with actual data field
-    private ArrayList<DummyData> mSearchResultList;
+    private ArrayList<TwitterData> mSearchResultList;
     private OnSearchResultClickListener mResultClickListener;
 
     interface OnSearchResultClickListener {
-        // TODO: 3/1/2020 Update dummy data 
-        void onSearchResultClicked(DummyData repo);
+        void onSearchResultClicked(TwitterData repo);
     }
 
     public UserSearchAdapter(OnSearchResultClickListener listener) {
         mResultClickListener = listener;
     }
 
-    public void updateSearchResults(ArrayList<DummyData> searchResultsList){
+    public void updateSearchResults(ArrayList<TwitterData> searchResultsList){
         mSearchResultList = searchResultsList;
         notifyDataSetChanged();
     }
@@ -65,12 +64,6 @@ public class UserSearchAdapter extends RecyclerView.Adapter<UserSearchAdapter.Se
 
     class SearchResultViewHolder extends RecyclerView.ViewHolder{
         private TextView mSearchResultTV;
-        private Spinner mSpinner;
-        //Will remove below to replace with live data
-        DummyData data = new DummyData();
-
-        // TODO: 3/11/2020 : Need to make this grab content from the twitter tweets and grab url.
-        // TODO: 3/11/2020 Need to construct a class to do this
 
         SearchResultViewHolder(View itemView) {
             super(itemView);
@@ -86,8 +79,8 @@ public class UserSearchAdapter extends RecyclerView.Adapter<UserSearchAdapter.Se
             });
         }
 
-        void bind(DummyData repo) {
-            mSearchResultTV.setText(repo.twitter_user);
+        void bind(TwitterData repo) {
+            mSearchResultTV.setText(repo.twitter_username);
         }
     }
 }

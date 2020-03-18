@@ -10,27 +10,28 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twitternews.Data.DummyData;
+import com.example.twitternews.Data.TwitterData;
 
 import java.util.ArrayList;
 
 public class TweetSearchAdapter extends RecyclerView.Adapter<TweetSearchAdapter.TweetResultViewHolder> {
 
     // TODO: 3/17/2020 : Dummy Data replace
-    private ArrayList<DummyData> mDummyData;
+    private TwitterData mTwitterData;
     private OnTweetResultClickListener mClickListener;
 
     interface OnTweetResultClickListener{
         // TODO: 3/17/2020 update dummy data
-        void onTweetResultClicked(DummyData data);
+        void onTweetResultClicked(TwitterData data);
     }
 
     public TweetSearchAdapter(OnTweetResultClickListener listener){
         mClickListener = listener;
     }
     
-    public void updateTweetResults(ArrayList<DummyData> tweetResults){
+    public void updateTweetResults(TwitterData tweetResults){
         // TODO: 3/17/2020 will need to change
-        mDummyData = tweetResults;
+        mTwitterData = tweetResults;
         notifyDataSetChanged();
     }
 
@@ -45,14 +46,14 @@ public class TweetSearchAdapter extends RecyclerView.Adapter<TweetSearchAdapter.
     @Override
     public void onBindViewHolder(@NonNull TweetResultViewHolder holder, int position) {
         // TODO: 3/17/2020 change this bull shit
-        holder.bind(mDummyData.get(position));
+        holder.bind(TwitterData);
     }
 
     @Override
     public int getItemCount() {
         // TODO: 3/17/2020 change dummy data
-        if(mDummyData != null){
-            return mDummyData.size();
+        if(mTwitterData != null){
+            return mTwitterData.twitter_tweets.size();
         }else{
             return 0;
         }
@@ -64,18 +65,20 @@ public class TweetSearchAdapter extends RecyclerView.Adapter<TweetSearchAdapter.
         public TweetResultViewHolder(@NonNull View itemView) {
             super(itemView);
             mSearchQueryTV = itemView.findViewById(R.id.tv_tweet_item);
-
+            String item = (String) mSearchQueryTV.getText();
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mClickListener.onTweetResultClicked(
-                            mDummyData.get(getAdapterPosition())
+                            mTwitterData.get(getAdapterPosition())
                     );
                 }
             });
         }
 
         // TODO: 3/17/2020 change this, this needs to update with query result for a good title from web crawl
-        void bind(DummyData data){mSearchQueryTV.setText(data.twitter_tweet);}
+        void bind(TwitterData data){
+            mSearchQueryTV.setText(data.twitter_tweet);
+        }
     }
 }

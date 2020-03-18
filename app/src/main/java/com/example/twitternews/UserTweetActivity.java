@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twitternews.Data.DummyData;
+import com.example.twitternews.Data.TwitterData;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class UserTweetActivity extends AppCompatActivity implements TweetSearchA
     private static final String TAG = UserTweetActivity.class.getSimpleName();
 
     // TODO: 3/17/2020 Need to change this to real data type: twitterdata json 
-    private DummyData mData;
+    private ArrayList<TwitterData> mData;
     TextView mUserNameTV;
     RecyclerView mUserTweetsRV;
     TweetSearchAdapter tweetAdapter;
@@ -32,9 +33,9 @@ public class UserTweetActivity extends AppCompatActivity implements TweetSearchA
 
         Intent intent = getIntent();
         if(intent != null && intent.hasExtra(TWEET_QUERIE_ACTIVITY)){
-            mData = (DummyData)intent.getSerializableExtra(TWEET_QUERIE_ACTIVITY);
+            mData = (TwitterData) intent.getSerializableExtra(TWEET_QUERIE_ACTIVITY);
             mUserNameTV = findViewById(R.id.tv_user_profile_name);
-            mUserNameTV.setText(mData.twitter_user);
+            mUserNameTV.setText(mData.twitter_username);
 
             mUserTweetsRV = findViewById(R.id.rv_tweet_results);
             mUserTweetsRV.setLayoutManager(new LinearLayoutManager(this));
@@ -43,21 +44,12 @@ public class UserTweetActivity extends AppCompatActivity implements TweetSearchA
             tweetAdapter = new TweetSearchAdapter(this);
             mUserTweetsRV.setAdapter(tweetAdapter);
             // TODO: 3/17/2020 update this to actually search tweets JSOUP API 
-            doTweetSearches("Hello world");
+            doTweetSearches(mData.twitter_tweets);
         }
     }
     
-    private void doTweetSearches(String searchQuery){
-        // TODO: 3/17/2020 May change this to
-        ArrayList<DummyData> tweetSearch = new ArrayList<>();
-
-        for(int i = 0; i < 6; i++){
-            DummyData tempData = new DummyData();
-            Log.d(TAG, "Adding tweet search query");
-            tempData.twitter_tweet = tempData.twitter_tweets[i];
-            tweetSearch.add(tempData);
-            tweetAdapter.updateTweetResults(tweetSearch);
-        }
+    private void doTweetSearches(ArrayList<String> searchQuery){
+        tweetAdapter.updateTweetResults(tweet);
     }
 
     @Override
