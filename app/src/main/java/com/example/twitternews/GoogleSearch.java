@@ -28,9 +28,9 @@ public class GoogleSearch {
 
     private static final String GOOGLE_SEARCH_URL = "https://duckduckgo.com/html/";
 
-    public ArrayList<WebData> doSearch(String tweet, Integer numResults) throws IOException {
+    public static ArrayList<WebData> doSearch(String tweet, Integer numResults) throws IOException {
         ArrayList<WebData> webList = new ArrayList<WebData>();
-        WebData item = new WebData();
+        Integer iterator = 0;
         //Taking search term input from console
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -39,15 +39,25 @@ public class GoogleSearch {
 
         Elements results = doc.getElementById("links").children();
         for (Element result : results) {
+            WebData item = new WebData();
             if(result.getElementsByClass("result__a").first() != null) {
+                iterator = iterator + 1;
                 String title = result.getElementsByClass("result__a").first().text();
                 String url = result.getElementsByClass("result__snippet").first().attr("href");
-//                Log.d("URL:", url);
-//                Log.d("TITLE:", title);
+                Log.d("URL:", url);
+                Log.d("TITLE:", title);
                 item.Title = title;
-                item.URL = url;
+                item.URL = url.replace("/l/?kh=-1&uddg=","");
                 webList.add(item);
+                if (iterator.equals(numResults)){
+                    break;
+                }
             }
+        }
+        Log.d("----","---------------------------------------");
+        for (WebData webGuy: webList){
+            Log.d("URL:", webGuy.URL);
+            Log.d("TITLE:", webGuy.Title);
         }
         return webList;
     }

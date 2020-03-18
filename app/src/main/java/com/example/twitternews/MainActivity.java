@@ -31,13 +31,13 @@ public class MainActivity extends AppCompatActivity implements UserSearchAdapter
 
   private ArrayList<WebData> webList;
 
-    {
-        try {
-            webList = new GoogleSearch().doSearch("hello", 5);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    {
+//        try {
+//            webList = new GoogleSearch().doSearch("hello", 5);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private RecyclerView mTwitterUserSearchRV;
     private EditText mSearchBoxET;
