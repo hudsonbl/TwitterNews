@@ -43,7 +43,9 @@ public class UserTweetActivity extends AppCompatActivity implements TweetSearchA
             
             tweetAdapter = new TweetSearchAdapter(this);
             mUserTweetsRV.setAdapter(tweetAdapter);
-            // TODO: 3/17/2020 update this to actually search tweets JSOUP API 
+            // TODO: 3/17/2020 update this to actually search tweets JSOUP API
+            // check main activity lines 36-44 for how to get the urls :)
+
             doTweetSearches(mData.twitter_tweets);
         }
     }
